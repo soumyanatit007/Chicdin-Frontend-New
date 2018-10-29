@@ -1,0 +1,85 @@
+@import '../../assets/sass/mixins';
+
+
+$color-white: #ffffff;
+$color-light-green: #a0b855;
+$color-green: #1fc341;
+$color-sky-blue: #5bc8b8;
+$color-black: #000000;
+$color-black2: #111111;
+$color-black3: #515151;
+$color-black4: #363334;
+$color-yellow: #ffce42;
+$color-gray: #eeeeee;
+$color-gray2: #ddd;
+$color-lighter-pink: #fff3f6;
+$color-light-pink: #efc5d3;
+$color-light-pink2: #ffcdd7;
+$color-light-pink3: #f3748a;
+$color-light-pink4: #fff5f7;
+$color-deep-pink: #f15f78;
+$color-pink: #ff5074;
+$color-pink2: #e9476e;
+$color-blue: #30354d;
+$color-sky-blue2: #3b5998;
+$color-deep-blue: #31364d;
+$color-light-black: #2c2c2c;
+$color-red: #dc3545;
+$color-light-gray: #f2f2f2;
+
+
+$screen-961: 961px;
+$screen-960: 960px;
+$screen-968: 768px;
+$screen-736: 736px;
+$screen-640: 640px;
+$screen-480: 480px;
+$screen-414: 414px;
+$screen-375: 375px;
+$screen-360: 360px;
+$screen-320: 320px;
+
+
+%profilePhotoDiv{
+    border-radius: 50%;
+    background: $color-white url(../../assets/img/profile.png) no-repeat center center;
+    background-size: 30px auto;
+}
+
+%inputTheme{
+    width: 100%;
+      border: none;
+      outline: none;
+      font-size: 25px;
+      color: $color-light-black;
+      height: 45px;
+      line-height: 45px;
+      margin: 5px;
+      text-indent: 10px;
+      color: #918a8c;
+      font-size: 14px;
+      background: $color-lighter-pink;
+      border: #e9dee1 1px solid;
+      @include border-radius(50px);
+      margin-right: 30px;
+      margin-bottom: 25px;
+      @media screen and (max-width: $screen-960) {
+        margin: 5px 0
+      }
+}
+
+%get-in-touch-btn {
+  width: 394px;
+  display: block;
+  text-align: center;
+  color: $color-white;
+  padding: 10px 0px;
+  background: $color-pink2;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 300;
+  @include border-radius(50px);
+  border: none;
+  margin: 15px auto 25px;
+  cursor: pointer;
+}

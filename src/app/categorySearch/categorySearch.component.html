@@ -1,0 +1,1199 @@
+<ng-progress></ng-progress>
+<div class="clearfix"></div>
+
+<section class="category-search-pnel pt-4 py-5">
+  <div class="container">
+    <div class="row">
+      <!--left-panel-->
+      <div class="col-sm-12 col-md-3 col-lg-3">
+        <div class="category-search-left">
+          <h1 class="filter-text py-3">Filters
+            <a href="javascript:void(0)" (click)="clearData()" class="text-primary float-lg-right font-13 mr-3 mt-1">Clear all</a>
+          </h1>
+          <hr>
+          <div class="category-left-check-list">
+            <ul>
+              <li class="w-100 float-left">
+                <label class="left-check-box">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+                <div class="promotions">
+                  <span class="percent">0%</span>PROMOTIONS</div>
+              </li>
+              <li class="w-100">
+                <label class="left-check-box">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label> Online Payment
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- <div class="category-search-left">
+          <hr>
+          <h1 class="filter-text py-3">Area</h1>
+          <div class="category-left-check-list mt-0">
+            <ul>
+              <li>
+                <label class="left-check-box">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label> Orchard
+                <div class="count"> (28)</div>
+              </li>
+              <li>
+                <label class="left-check-box">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label> Tanjong Pagar
+                <div class="count"> (28)</div>
+              </li>
+              <li>
+                <label class="left-check-box">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label> Raffles Place
+                <div class="count"> (28)</div>
+              </li>
+              <li>
+                <label class="left-check-box">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label> Somerset
+                <div class="count"> (28)</div>
+              </li>
+              <li>
+                <a href="" class="text-primary">
+                  <i class="ion-ios-plus-outline"></i> View More</a>
+              </li>
+            </ul>
+          </div>
+        </div> -->
+
+        <div class="category-search-left">
+          <hr>
+          <h1 class="filter-text py-3">Services</h1>
+          <div>
+            <div class="category-left-check-list services mt-0">
+              <ul>
+                <li *ngFor='let category of subcategories| slice:initialvalue:maxvalue'>
+                  <div>
+                    <label class="left-check-box">
+                      <input type="checkbox" (change)='selectService($event.target.checked,category)'>
+                      <span class="checkmark "></span>
+                    </label>
+                    {{category.name}}
+                  </div>
+                  <div class="count "> ({{category.total_company}})</div>
+                </li>
+                <li *ngIf='isShowButton'>
+                  <a href="javascript:void(0) " class="text-primary" (click)='showCategories()'>
+                    <i class="ion-ios-plus-outline "></i> View More</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="category-search-left " *ngIf="isShowPrice">
+          <hr>
+          <h1 class="filter-text py-3 ">Service’s Price</h1>
+          <div class="category-left-check-list mt-0 ">
+            <div class="mb-4 ">
+              <ion-range-slider [min]="minPrice" [max]="maxPrice" [from_min]="minPrice" [to_max]="maxPrice" type="double" from_shadow="false "
+                to_shadow="false" grid="false" (onChange)="myOnChange($event)"></ion-range-slider>
+            </div>
+          </div>
+        </div>
+
+        <form [formGroup]="datePickup">
+          <div class="category-search-left ">
+            <hr>
+            <h1 class="filter-text py-3 ">Date</h1>
+            <div class="category-left-check-list mt-0 ">
+              <ul>
+                <li>
+                  <div class="input-group mb-3 ">
+                    <input type="text" class="form-control border-right-0" placeholder="Select Date" aria-label="Recipient 's username" #dp="bsDatepicker"
+                      bsDatepicker [bsValue]="bsValue" [minDate]="bsValue" formControlName="selected_date">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary date-btn" type="button" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen">
+                        <i class="ion-calendar"></i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </form>
+
+        <!-- <div class="category-search-left">
+          <hr>
+          <h1 class="filter-text py-3">Time</h1>
+          <div class="category-left-check-list mt-0">
+            <ul>
+              <li>
+                <label class="left-check-box round-check">
+                  <input type="radio" name="radio">
+                  <span class="checkmark"></span>
+                </label>
+                Any Time
+              </li>
+              <li>
+                <label class="left-check-box round-check">
+                  <input type="radio" name="radio">
+                  <span class="checkmark"></span>
+                </label>
+                Morning
+              </li>
+              <li>
+                <label class="left-check-box round-check">
+                  <input type="radio" name="radio">
+                  <span class="checkmark"></span>
+                </label>
+                Afternoon
+              </li>
+              <li>
+                <label class="left-check-box round-check">
+                  <input type="radio" name="radio">
+                  <span class="checkmark"></span>
+                </label>
+                Evening
+              </li>
+            </ul>
+          </div>
+        </div> -->
+
+      </div>
+      <!--end left panel-->
+      <!--right pane-->
+
+      <div class="col-sm-12 col-md-9 col-lg-9" *ngIf="isShowDetails">
+        <div class="category-search-right-box mb-4 margin-bottom">
+          <h1 class="category-search-heading"> {{message}}</h1>
+          <div class="category-search-bar py-2">
+            Showing {{totalItems}} results.
+          </div>
+
+          <div class="category-search-loop hoverable-loop">
+            <div *ngFor='let result of SearchResult '>
+              <div class="card">
+                <div *ngFor='let compDetails of result.company_details ' class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                  <!-- <a [routerLink]="['/details/'+compDetails.slug]"> -->
+                  <a href="javascript:void(0)" (click)="goCompDetailsPage(compDetails)">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-sm-12 col-md-5 col-lg-5" *ngIf="!compDetails.image">
+                          <img class="img-fluid" src="assets/img/No_image_available.png">
+                        </div>
+                        <div class="col-sm-12 col-md-5 col-lg-5" *ngIf="compDetails.image">
+                          <img class="img-fluid" src={{compDetails.image}}>
+                        </div>
+                        <div class="col-sm-12 col-md-7 col-lg-7">
+                          <div class="category-right-detail">
+                            <h1 class="pb-1">{{compDetails.name}}</h1>
+                            <p>{{compDetails.address}}
+                              <!-- <br> Raffles Place, 049829, California -->
+                            </p>
+                          </div>
+                          <div class="category-right-star-list">
+                            <ul>
+                              <li>
+                                <a href="#">
+                                  <i class="icon ion-ios-star"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="icon ion-ios-star"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="icon ion-ios-star"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="icon ion-ios-star"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="icon ion-ios-star"></i>
+                                </a>
+                              </li>
+                            </ul>
+                            <ul class="rit">
+                              <li>
+                                <a href="#">
+                                  <img src="assets/img/card.jpg"> </a>
+                              </li>
+                              <li>
+                                <a href="#"> $$$</a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <div class="promotions">
+                                    <span>0%</span>PROMOTIONS</div>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                          <p class="category-right-paragraph">{{compDetails.description}} </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card second-card">
+                      <div class="card-header" *ngFor='let service of result.services'>
+                        <h5 class="mb-0">
+                          <button class="btn btn-link">
+                            {{service.title}}
+                          </button>
+                          <span class="text-right">
+                            <i class="icon ion-android-alarm-clock"></i> {{service.duration}} min | $ {{service.price}}.00</span>
+                        </h5>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!--end accrodien part-->
+          <!-- <div class="category-search-loop">
+            <div id="accordion3">
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#tab1" aria-expanded="true" aria-controls="collapseOne">
+                      Kids Haircut
+                    </button>
+                    <span class="text-right">
+                      <i class="icon ion-android-alarm-clock"></i> 30 min | $ 27.00</span>
+                  </h5>
+                </div>
+                <div id="tab1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion3">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-5 col-lg-5">
+                        <img class="img-fluid" src="assets/img/product-search-pic.jpg">
+                      </div>
+                      <div class="col-sm-12 col-md-7 col-lg-7">
+                        <div class="category-right-detail">
+                          <h1 class="pb-1">Blow + Bar - Boat Quay</h1>
+                          <p>40B Boat Quay California
+                            <br> Raffles Place, 049829, California
+                          </p>
+                        </div>
+                        <div class="category-right-star-list">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                          </ul>
+                          <ul class="rit">
+                            <li>
+                              <a href="#">
+                                <img src="assets/img/card.jpg"> </a>
+                            </li>
+                            <li>
+                              <a href="#"> $$$</a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <div class="promotions">
+                                  <span>0%</span>PROMOTIONS</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                        <p class="category-right-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#tab2" aria-expanded="true" aria-controls="collapseOne">
+            Kids Haircut
+          </button>
+          <span class="text-right">
+            <i class="icon ion-android-alarm-clock"></i> 30 min | $ 27.00</span>
+        </h5>
+      </div>
+      <div id="tab2" class="collapse" aria-labelledby="headingOne" data-parent="#accordion3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-md-5 col-lg-5">
+              <img class="img-fluid" src="assets/img/product-search-pic.jpg">
+            </div>
+            <div class="col-sm-12 col-md-7 col-lg-7">
+              <div class="category-right-detail">
+                <h1 class="pb-1">Blow + Bar - Boat Quay</h1>
+                <p>40B Boat Quay California
+                  <br> Raffles Place, 049829, California
+                </p>
+              </div>
+              <div class="category-right-star-list">
+                <ul>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                </ul>
+                <ul class="rit">
+                  <li>
+                    <a href="#">
+                      <img src="assets/img/card.jpg"> </a>
+                  </li>
+                  <li>
+                    <a href="#"> $$$</a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="promotions">
+                        <span>0%</span>PROMOTIONS</div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <p class="category-right-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                standard dummy text ever since the 1500s, when an unknown printer </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#tab3" aria-expanded="true" aria-controls="collapseOne">
+            Kids Haircut
+          </button>
+          <span class="text-right">
+            <i class="icon ion-android-alarm-clock"></i> 30 min | $ 27.00</span>
+        </h5>
+      </div>
+      <div id="tab3" class="collapse" aria-labelledby="headingOne" data-parent="#accordion3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-md-5 col-lg-5">
+              <img class="img-fluid" src="assets/img/product-search-pic.jpg">
+            </div>
+            <div class="col-sm-12 col-md-7 col-lg-7">
+              <div class="category-right-detail">
+                <h1 class="pb-1">Blow + Bar - Boat Quay</h1>
+                <p>40B Boat Quay California
+                  <br> Raffles Place, 049829, California
+                </p>
+              </div>
+              <div class="category-right-star-list">
+                <ul>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                </ul>
+                <ul class="rit">
+                  <li>
+                    <a href="#">
+                      <img src="assets/img/card.jpg"> </a>
+                  </li>
+                  <li>
+                    <a href="#"> $$$</a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="promotions">
+                        <span>0%</span>PROMOTIONS</div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <p class="category-right-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                standard dummy text ever since the 1500s, when an unknown printer </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#tab4" aria-expanded="true" aria-controls="collapseOne">
+            Kids Haircut
+          </button>
+          <span class="text-right">
+            <i class="icon ion-android-alarm-clock"></i> 30 min | $ 27.00</span>
+        </h5>
+      </div>
+      <div id="tab4" class="collapse" aria-labelledby="headingOne" data-parent="#accordion3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-md-5 col-lg-5">
+              <img class="img-fluid" src="assets/img/product-search-pic.jpg">
+            </div>
+            <div class="col-sm-12 col-md-7 col-lg-7">
+              <div class="category-right-detail">
+                <h1 class="pb-1">Blow + Bar - Boat Quay</h1>
+                <p>40B Boat Quay California
+                  <br> Raffles Place, 049829, California
+                </p>
+              </div>
+              <div class="category-right-star-list">
+                <ul>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="icon ion-ios-star"></i>
+                    </a>
+                  </li>
+                </ul>
+                <ul class="rit">
+                  <li>
+                    <a href="#">
+                      <img src="assets/img/card.jpg"> </a>
+                  </li>
+                  <li>
+                    <a href="#"> $$$</a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="promotions">
+                        <span>0%</span>PROMOTIONS</div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <p class="category-right-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                standard dummy text ever since the 1500s, when an unknown printer </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div> -->
+
+          <!--end accrodien part-->
+          <!-- <div class="category-search-loop">
+            <div id="accordion2">
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#one" aria-expanded="true" aria-controls="collapseOne">
+                      Kids Haircut
+                    </button>
+                    <span class="text-right">
+                      <i class="icon ion-android-alarm-clock"></i> 30 min | $ 27.00</span>
+                  </h5>
+                </div>
+                <div id="one" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion2">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-5 col-lg-5">
+                        <img class="img-fluid" src="assets/img/product-search-pic.jpg">
+                      </div>
+                      <div class="col-sm-12 col-md-7 col-lg-7">
+                        <div class="category-right-detail">
+                          <h1 class="pb-1">Blow + Bar - Boat Quay</h1>
+                          <p>40B Boat Quay California
+                            <br> Raffles Place, 049829, California
+                          </p>
+                        </div>
+                        <div class="category-right-star-list">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                          </ul>
+                          <ul class="rit">
+                            <li>
+                              <a href="#">
+                                <img src="assets/img/card.jpg"> </a>
+                            </li>
+                            <li>
+                              <a href="#"> $$$</a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <div class="promotions">
+                                  <span>0%</span>PROMOTIONS</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                        <p class="category-right-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                          standard dummy text ever since the 1500s, when an unknown printer </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#tow" aria-expanded="true" aria-controls="collapseOne">
+                      Kids Haircut
+                    </button>
+                    <span class="text-right">
+                      <i class="icon ion-android-alarm-clock"></i> 30 min | $ 27.00</span>
+                  </h5>
+                </div>
+                <div id="tow" class="collapse" aria-labelledby="headingOne" data-parent="#accordion2">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-5 col-lg-5">
+                        <img class="img-fluid" src="assets/img/product-search-pic.jpg">
+                      </div>
+                      <div class="col-sm-12 col-md-7 col-lg-7">
+                        <div class="category-right-detail">
+                          <h1 class="pb-1">Blow + Bar - Boat Quay</h1>
+                          <p>40B Boat Quay California
+                            <br> Raffles Place, 049829, California
+                          </p>
+                        </div>
+                        <div class="category-right-star-list">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                          </ul>
+                          <ul class="rit">
+                            <li>
+                              <a href="#">
+                                <img src="assets/img/card.jpg"> </a>
+                            </li>
+                            <li>
+                              <a href="#"> $$$</a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <div class="promotions">
+                                  <span>0%</span>PROMOTIONS</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                        <p class="category-right-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                          standard dummy text ever since the 1500s, when an unknown printer </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#three" aria-expanded="true" aria-controls="collapseOne">
+                      Kids Haircut
+                    </button>
+                    <span class="text-right">
+                      <i class="icon ion-android-alarm-clock"></i> 30 min | $ 27.00</span>
+                  </h5>
+                </div>
+                <div id="three" class="collapse" aria-labelledby="headingOne" data-parent="#accordion2">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-5 col-lg-5">
+                        <img class="img-fluid" src="assets/img/product-search-pic.jpg">
+                      </div>
+                      <div class="col-sm-12 col-md-7 col-lg-7">
+                        <div class="category-right-detail">
+                          <h1 class="pb-1">Blow + Bar - Boat Quay</h1>
+                          <p>40B Boat Quay California
+                            <br> Raffles Place, 049829, California
+                          </p>
+                        </div>
+                        <div class="category-right-star-list">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                          </ul>
+                          <ul class="rit">
+                            <li>
+                              <a href="#">
+                                <img src="assets/img/card.jpg"> </a>
+                            </li>
+                            <li>
+                              <a href="#"> $$$</a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <div class="promotions">
+                                  <span>0%</span>PROMOTIONS</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                        <p class="category-right-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                          standard dummy text ever since the 1500s, when an unknown printer </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#four" aria-expanded="true" aria-controls="collapseOne">
+                      Kids Haircut
+                    </button>
+                    <span class="text-right">
+                      <i class="icon ion-android-alarm-clock"></i> 30 min | $ 27.00</span>
+                  </h5>
+                </div>
+                <div id="four" class="collapse" aria-labelledby="headingOne" data-parent="#accordion2">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-5 col-lg-5">
+                        <img class="img-fluid" src="assets/img/product-search-pic.jpg">
+                      </div>
+                      <div class="col-sm-12 col-md-7 col-lg-7">
+                        <div class="category-right-detail">
+                          <h1 class="pb-1">Blow + Bar - Boat Quay</h1>
+                          <p>40B Boat Quay California
+                            <br> Raffles Place, 049829, California
+                          </p>
+                        </div>
+                        <div class="category-right-star-list">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                          </ul>
+                          <ul class="rit">
+                            <li>
+                              <a href="#">
+                                <img src="assets/img/card.jpg"> </a>
+                            </li>
+                            <li>
+                              <a href="#"> $$$</a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <div class="promotions">
+                                  <span>0%</span>PROMOTIONS</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                        <p class="category-right-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                          standard dummy text ever since the 1500s, when an unknown printer </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <!--end accrodien part-->
+          <!-- <div class="category-search-loop">
+            <div id="accordion4">
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#tabone" aria-expanded="true" aria-controls="collapseOne">
+                      Kids Haircut
+                    </button>
+                    <span class="text-right">
+                      <i class="icon ion-android-alarm-clock"></i> 30 min | $ 27.00</span>
+                  </h5>
+                </div>
+                <div id="tabone" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion4">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-5 col-lg-5">
+                        <img class="img-fluid" src="assets/img/product-search-pic.jpg">
+                      </div>
+                      <div class="col-sm-12 col-md-7 col-lg-7">
+                        <div class="category-right-detail">
+                          <h1 class="pb-1">Blow + Bar - Boat Quay</h1>
+                          <p>40B Boat Quay California
+                            <br> Raffles Place, 049829, California
+                          </p>
+                        </div>
+                        <div class="category-right-star-list">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                          </ul>
+                          <ul class="rit">
+                            <li>
+                              <a href="#">
+                                <img src="assets/img/card.jpg"> </a>
+                            </li>
+                            <li>
+                              <a href="#"> $$$</a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <div class="promotions">
+                                  <span>0%</span>PROMOTIONS</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                        <p class="category-right-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                          standard dummy text ever since the 1500s, when an unknown printer </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#tabtow" aria-expanded="true" aria-controls="collapseOne">
+                      Kids Haircut
+                    </button>
+                    <span class="text-right">
+                      <i class="icon ion-android-alarm-clock"></i> 30 min | $ 27.00</span>
+                  </h5>
+                </div>
+                <div id="tabtow" class="collapse" aria-labelledby="headingOne" data-parent="#accordion4">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-5 col-lg-5">
+                        <img class="img-fluid" src="assets/img/product-search-pic.jpg">
+                      </div>
+                      <div class="col-sm-12 col-md-7 col-lg-7">
+                        <div class="category-right-detail">
+                          <h1 class="pb-1">Blow + Bar - Boat Quay</h1>
+                          <p>40B Boat Quay California
+                            <br> Raffles Place, 049829, California
+                          </p>
+                        </div>
+                        <div class="category-right-star-list">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                          </ul>
+                          <ul class="rit">
+                            <li>
+                              <a href="#">
+                                <img src="assets/img/card.jpg"> </a>
+                            </li>
+                            <li>
+                              <a href="#"> $$$</a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <div class="promotions">
+                                  <span>0%</span>PROMOTIONS</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                        <p class="category-right-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                          standard dummy text ever since the 1500s, when an unknown printer </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#tabthree" aria-expanded="true" aria-controls="collapseOne">
+                      Kids Haircut
+                    </button>
+                    <span class="text-right">
+                      <i class="icon ion-android-alarm-clock"></i> 30 min | $ 27.00</span>
+                  </h5>
+                </div>
+                <div id="tabthree" class="collapse" aria-labelledby="headingOne" data-parent="#accordion4">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-5 col-lg-5">
+                        <img class="img-fluid" src="assets/img/product-search-pic.jpg">
+                      </div>
+                      <div class="col-sm-12 col-md-7 col-lg-7">
+                        <div class="category-right-detail">
+                          <h1 class="pb-1">Blow + Bar - Boat Quay</h1>
+                          <p>40B Boat Quay California
+                            <br> Raffles Place, 049829, California
+                          </p>
+                        </div>
+                        <div class="category-right-star-list">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                          </ul>
+                          <ul class="rit">
+                            <li>
+                              <a href="#">
+                                <img src="assets/img/card.jpg"> </a>
+                            </li>
+                            <li>
+                              <a href="#"> $$$</a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <div class="promotions">
+                                  <span>0%</span>PROMOTIONS</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                        <p class="category-right-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                          standard dummy text ever since the 1500s, when an unknown printer </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#tabfour" aria-expanded="true" aria-controls="collapseOne">
+                      Kids Haircut
+                    </button>
+                    <span class="text-right">
+                      <i class="icon ion-android-alarm-clock"></i> 30 min | $ 27.00</span>
+                  </h5>
+                </div>
+                <div id="tabfour" class="collapse" aria-labelledby="headingOne" data-parent="#accordion4">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-5 col-lg-5">
+                        <img class="img-fluid" src="assets/img/product-search-pic.jpg">
+                      </div>
+                      <div class="col-sm-12 col-md-7 col-lg-7">
+                        <div class="category-right-detail">
+                          <h1 class="pb-1">Blow + Bar - Boat Quay</h1>
+                          <p>40B Boat Quay California
+                            <br> Raffles Place, 049829, California
+                          </p>
+                        </div>
+                        <div class="category-right-star-list">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="icon ion-ios-star"></i>
+                              </a>
+                            </li>
+                          </ul>
+                          <ul class="rit">
+                            <li>
+                              <a href="#">
+                                <img src="assets/img/card.jpg"> </a>
+                            </li>
+                            <li>
+                              <a href="#"> $$$</a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <div class="promotions">
+                                  <span>0%</span>PROMOTIONS</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                        <p class="category-right-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                          standard dummy text ever since the 1500s, when an unknown printer </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <!--end accrodien part-->
+
+
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-12 mb-5">
+            <pagination [totalItems]="totalItems" [maxSize]="5" (pageChanged)="pageChanged($event)"></pagination>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="col-md-9">
+        <div class="no-found" *ngIf="!isShowDetails">
+          <i class="fas fa-ban"></i>
+          No records found
+
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+  <!--end right panel-->
+</section>

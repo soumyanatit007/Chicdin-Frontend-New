@@ -1,0 +1,36 @@
+@import '../../assets/sass/variables';
+@import '../../assets/sass/mixins';
+
+.r-btn{
+    transform: scale(1.5,1.5);
+}
+.payment-success{
+    color: #888;
+    p{
+        font-size: 13px;
+        color: #888;
+    }
+    .thead-danger{
+        background: #f15f78;
+    }
+    h4{
+        font-size: 20px;
+    }
+    .table thead th{
+        white-space: nowrap;
+    text-align: center;
+    width: 25%;
+    color: #fff;
+    border: 0;
+    }
+    .table td{
+        text-align: center;
+        width: 25%;
+    }
+    .table{
+        border: 1px solid #ccc;
+        font-size: 14px;
+        margin: 0;
+    }
+}
+

@@ -1,0 +1,262 @@
+<div class="clearfix"></div>
+<div class="profole pt-1 pb-5">
+  <div class="container">
+    <tabset>
+      <tab heading="My Profile">
+        <form>
+          <h1 class="text-center mb-1">My Profile</h1>
+          <div class="text-center mb-5">
+            <!-- <div class="profoleImagePart" style="display:none;" id="changeImagePart">
+              <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+              <div>
+                <a href="javascript:void(0)" (click)="saveImage()" class="uploadIcon ok">
+                  <i class="fa fa-check"></i>
+                </a>
+                <a href="javascript:void(0)" (click)="cancelImage()" class="uploadIcon">
+                  <i class="fa fa-times"></i>
+                </a>
+              </div>
+            </div> -->
+            <div class="profoleImagePart" *ngIf="IsShowImagePart">
+              <div class="image" *ngIf='isDefaultImageShow'>
+
+              </div>
+              <div class="image" *ngIf='isImageShow'>
+                <img src={{userImage}}>
+              </div>
+            </div>
+
+            <!-- <div class="change-profile d-inline-block mt-3">
+              <label class="font-14">
+                Change your profile photo
+              </label>
+              <input id="custom-input" type="file" (change)="fileChangeListener($event)">
+            </div> -->
+          </div>
+          <div class="row mb-150">
+            <div class="offset-lg-2 col-lg-8">
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="input-warp">
+                    <input type="text" value="{{ getuserdetail?.first_name }}" readonly="readonly">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="input-warp">
+                    <input type="text" value="{{ getuserdetail?.last_name }}" readonly="readonly">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="input-warp">
+                    <input type="text" value="{{ getuserdetail?.email }}" readonly="readonly">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="input-warp">
+                    <input type="text" value="{{ getuserdetail?.phone }}" readonly="readonly">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-warp">
+                    <input type="text" value="{{ getuserdetail?.date_of_birth }}" readonly="readonly">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </tab>
+      <tab heading="Invite your friend">Invite your friend</tab>
+      <tab heading="Edit Profile">
+        <form [formGroup]="editProfile">
+          <h1 class="text-center mb-1">Edit Profile</h1>
+          <!-- <h4 class="text-center mb-5">Lorem Ipsum is simply dummy text</h4> -->
+          <div class="text-center mb-5">
+            <div class="profoleImagePart" style="display:none;" id="changeImagePart">
+              <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+              <div>
+                <a href="javascript:void(0)" (click)="saveImage()" class="uploadIcon ok">
+                  <i class="fa fa-check"></i>
+                </a>
+                <a href="javascript:void(0)" (click)="cancelImage()" class="uploadIcon">
+                  <i class="fa fa-times"></i>
+                </a>
+              </div>
+            </div>
+            <div class="profoleImagePart" *ngIf="IsShowImagePart">
+              <div class="image" *ngIf='isDefaultImageShow'>
+
+              </div>
+              <div class="image" *ngIf='isImageShow'>
+                <img src={{userImage}}>
+              </div>
+            </div>
+
+            <div class="change-profile d-inline-block mt-3">
+              <label class="font-14">
+                Change your profile photo
+              </label>
+              <!-- <input type="file" (change)="onChange($event)" /> -->
+              <input id="custom-input" type="file" (change)="fileChangeListener($event)">
+            </div>
+            <!--<div>
+                  <div class="file-upload">
+                    <span class="text">upload</span>
+                      <input id="custom-input" type="file" (change)="fileChangeListener($event)">
+                  </div>
+                  <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+                  <br>
+                  <span class="result rounded" *ngIf="data.image">
+                    <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+                  </span>
+                </div> -->
+          </div>
+
+          <div class="row mb-150">
+            <div class="offset-lg-2 col-lg-8">
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="input-warp">
+                    <input type="text" [ngClass]="{'bordererror': !editProfile.controls['first_name'].valid && editProfile.controls['first_name'].touched}"
+                      formControlName="first_name" name="first_name">
+
+                    <a href='javascript:void(0)' *ngIf="!editProfile.controls['first_name'].valid && editProfile.controls['first_name'].touched"
+                      (click)='firstNameErrorMessage()' class="info-icon">
+                      <i class="fa fa-exclamation"></i>
+                    </a>
+
+                    <div class="text-danger error-massage" *ngIf="!editProfile.controls['first_name'].valid && editProfile.controls['first_name'].touched && isShowFirstNameErrorMessage">
+                      First name should be at least 2 characters.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="input-warp">
+                    <input type="text" [ngClass]="{'bordererror': !editProfile.controls['last_name'].valid && editProfile.controls['last_name'].touched}"
+                      name="last_name" formControlName="last_name">
+
+                    <a href='javascript:void(0)' *ngIf="!editProfile.controls['last_name'].valid && editProfile.controls['last_name'].touched"
+                      (click)='lastNameErrorMessage()' class="info-icon">
+                      <i class="fa fa-exclamation"></i>
+                    </a>
+
+                    <div class="text-danger error-massage" *ngIf="!editProfile.controls['last_name'].valid && editProfile.controls['last_name'].touched && isShowLastNameErrorMessage">
+                      Last name should be at least 2 characters.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="input-warp">
+                    <input type="text" formControlName="email">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="input-warp">
+                    <input type="text" myNumberOnly [ngClass]="{'bordererror': !editProfile.controls['mobile'].valid && editProfile.controls['mobile'].touched}"
+                      name="mobile" formControlName="mobile">
+
+                    <a href='javascript:void(0)' *ngIf="!editProfile.controls['mobile'].valid && editProfile.controls['mobile'].touched" (click)='mobileErrorMessage()'
+                      class="info-icon">
+                      <i class="fa fa-exclamation"></i>
+                    </a>
+
+                    <div class="text-danger error-massage" *ngIf="!editProfile.controls['mobile'].valid && editProfile.controls['mobile'].touched && isShowMobileErrorMessage">
+                      Phone number should be at least 10 digit.
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-md-6">
+                    <input type="text" placeholder="Neighbourhood">
+                  </div> -->
+                <div class="col-md-6">
+                  <div class="input-warp">
+                    <input type="text" class="form-control" [maxDate]="maxDate" formControlName="date_of_birth" bsDatepicker>
+                  </div>
+                </div>
+
+                <div class="col-md-12 mt-md-5 mt-3">
+                  <button type="submit" [ladda]="isLoading" class="savebtn" (click)="submit(editProfile.value)" [disabled]="!editProfile.valid">
+                    SAVE </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </tab>
+
+
+      <tab heading="Change Password">
+        <form [formGroup]="changePassword">
+          <h1 class="text-center mb-1">Change Password</h1>
+          <div class="row mb-150">
+            <div class="offset-lg-2 col-lg-8">
+
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="input-warp">
+                    <input type="password" placeholder="Old Password" [ngClass]="{'bordererror': !changePassword.controls['old_password'].valid && changePassword.controls['old_password'].touched}"
+                      formControlName="old_password" name="old_password">
+
+                    <a href='javascript:void(0)' *ngIf="!changePassword.controls['old_password'].valid && changePassword.controls['old_password'].touched"
+                      (click)='oldPasswordErrorMessage()' class="info-icon">
+                      <i class="fa fa-exclamation"></i>
+                    </a>
+
+                    <div class="text-danger error-massage" *ngIf="!changePassword.controls['old_password'].valid && changePassword.controls['old_password'].touched && isShowOldPasswordErrorMessage">
+                      Passsword should be at least 6 characters. </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="input-warp">
+                    <input type="text" placeholder="New Password" [ngClass]="{'bordererror': !changePassword.controls['password'].valid && changePassword.controls['password'].touched}"
+                      name="password" formControlName="password">
+
+                    <a href='javascript:void(0)' *ngIf="!changePassword.controls['password'].valid && changePassword.controls['password'].touched"
+                      (click)='passwordErrorMessage()' class="info-icon">
+                      <i class="fa fa-exclamation"></i>
+                    </a>
+
+                    <div class="text-danger error-massage" *ngIf="!changePassword.controls['password'].valid && changePassword.controls['password'].touched && isShowPasswordErrorMessage">
+                      Passsword should be at least 6 characters. </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="input-warp">
+                    <input type="text" placeholder="Confirm Password" [ngClass]="{'bordererror': !changePassword.controls['confirmed_password'].valid && changePassword.controls['confirmed_password'].touched}"
+                      name="confirm_password" formControlName="confirmed_password">
+
+                    <a href='javascript:void(0)' *ngIf="!changePassword.controls['confirmed_password'].valid && changePassword.controls['confirmed_password'].touched"
+                      (click)='confirmPasswordErrorMessage()' class="info-icon">
+                      <i class="fa fa-exclamation"></i>
+                    </a>
+
+                    <div class="text-danger error-massage" *ngIf="!changePassword.controls['confirmed_password'].valid && changePassword.controls['confirmed_password'].touched && isShowConfirmPasswordErrorMessage">
+                      Password not matched. </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 mt-md-5 mt-3">
+                  <button type="submit" [ladda]="isLoading" class="savebtn" (click)="PasswordChange(changePassword.value)" [disabled]="!changePassword.valid">
+                    Submit </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </tab>
+      <tab heading="Logout" customClass="logouttab" (select)="logout()"></tab>
+    </tabset>
+  </div>
+</div>

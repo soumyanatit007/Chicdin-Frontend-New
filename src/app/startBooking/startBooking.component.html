@@ -1,0 +1,97 @@
+<section class="checkout-steps mb-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="checkout-steps-list">
+          <li class="steps-list-item active">
+            <div class="step-number">1</div>
+            <div class="step-description">Schedule appointment</div>
+          </li>
+          <li class="steps-list-item">
+            <div class="step-number">2</div>
+            <div class="step-description">Pay and Book</div>
+          </li>
+          <li class="steps-list-item">
+            <div class="step-number">3</div>
+            <div class="step-description">Booking Confirmation</div>
+          </li>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="checkout-body mb-150">
+  <div class="container">
+    <div class="checkout-body-left" *ngIf="isProfessional">
+      <div class="select-prof d-flex justify-content-between">
+        <p class="mb-0" *ngIf="isShowDefaultName">
+          <img src="assets/img/imgo.jpg"> Any Professional
+        </p>
+        <p class="mb-0" *ngIf="isShowStaffName">
+          <img src="assets/img/imgo.jpg" *ngIf="isShowStaffName"> {{staffName}}
+        </p>
+        <a href="" data-toggle="modal" data-target="#exampleModal">Select</a>
+      </div>
+    </div>
+    <div class="checkout-body-left" *ngIf="isShowCalendar">
+      <div class="select-prof d-flex justify-content-center mt-4">
+        <div *ngIf="calendarOptions">
+          <ng-fullcalendar #ucCalendar [options]="calendarOptions" (clickButton)="arrowClick($event.detail)" (select)="select($event)"></ng-fullcalendar>
+        </div>
+      </div>
+    </div>
+
+    <div class="checkout-body-right">
+      <div class="recap-sidebar">
+        <div class="recap-sidebar-item">
+          <h6>{{companyName}}{{companyLocation}}</h6>
+        </div>
+        <div class="recap-sidebar-item" *ngFor="let data of serviceData">
+          <p class="name">{{data.category}}</p>
+          <span class="duration">{{data.duration}} min</span>
+          <span class="price float-right">SGD {{data.price}}.00</span>
+        </div>
+        <div class="recap-sidebar-item">
+          <div class="order-total d-flex align-items-center">
+            <i>Select a date and time to proceed booking</i>
+            <span>SGD {{totalPrice}}.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Staff</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="category-left-check-list mt-0 p-0">
+            <ul>
+              <li class="d-flex justify-content-between align-items-center" *ngFor="let staffName of booking_staff_fetch_result">
+                <label class="left-check-box round-check">
+                  <input name="radio" type="radio" [value]='staffName.id' [(ngModel)]="staff_Details" (ngModelChange)="staffDetailsChangeValue($event)">
+                  <span class="checkmark"></span>
+                </label>
+                <div style="flex:1 1 auto">
+                  <p class="mt-1 mb-0">{{staffName.name}}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer text-center font-14">
+          <a href="" data-dismiss="modal" class="w-100 d-block">Close</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,289 @@
+.login-div {
+    position: absolute;
+    top: 36px;
+    z-index: 2;
+}
+
+section,
+footer {
+    width: 100%;
+    float: left;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 1.8rem;
+    padding-left: 1.8rem;
+}
+
+.overlay-div {
+    top: 0;
+    background: hsla(253.8, 15.7%, 16.3%, 0.5);
+    z-index: 1;
+}
+
+.overlay-txtdiv {
+    h1 {
+        font-size: 82.74px;
+        line-height: 65px;
+        span {
+            font-family: gp;
+            font-weight: 700;
+            font-size: 35.7px;
+        }
+    }
+    a {
+        border-color: $color-light-pink !important;
+    }
+}
+
+.discover-section {
+    width: 100%;
+    display: block;
+}
+
+.discover-palne {
+    width: 100%;
+    display: block;
+    height: 100%;
+}
+
+h1.discover-palne-heading {
+    color: $color-blue;
+    font-size: 40px;
+    font-weight: normal;
+    text-transform: capitalize;
+    width: 100%;
+    text-align: center;
+}
+
+p.paragraph {
+    color: $color-black3;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: normal;
+}
+.submenu{
+    color:black !important;
+    
+}
+
+.main_navigation {
+    float: right;
+    width: auto;
+    @media screen and (max-width: $screen-960) {
+        display: none;
+        position: absolute;
+        background: $color-white;
+        top: 100%;
+        width: 100%;
+        left: 0;
+        z-index: 9999;
+        .mean-expand {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 5;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.15);
+            line-height: 40px;
+            &:before {
+                position: absolute;
+                height: 10px;
+                width: 2px;
+                content: "";
+                background: $color-white;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+            }
+            &:after {
+                position: absolute;
+                width: 10px;
+                height: 2px;
+                content: "";
+                background: $color-white;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+            }
+            &.mean-clicked:before {
+                display: none;
+            }
+        }
+    }
+    ul {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+        li {
+            float: left;
+            width: auto;
+            position: relative;
+            @media screen and (max-width: $screen-960) {
+                width: 100%;
+            }
+            @media screen and (min-width: $screen-961) {
+                li {
+                    &:hover>ul {
+                        opacity: 1;
+                        visibility: visible;
+                        @include transform(translateX(0px));
+                        @include transition(all 400ms ease-in-out);
+                    }
+                    ul ul {
+                        top: 0;
+                        left: 100%;
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+                }
+                ul li {
+                    width: 100%;
+                    float: left;
+                    a {
+                        border: none;
+                        border-bottom: 1px screen $color-gray2;
+                        color: $color-white;
+                        padding: 8px 15px;
+                        width: 100%;
+                    }
+                }
+            }
+            .current-menu-item {
+                background: $color-light-green;
+            }
+            &.active a {
+                color: $color-sky-blue;
+            }
+            a {
+                color: $color-white;
+                padding: 20px 30px;
+                font-weight: normal;
+                text-transform: uppercase;
+                font-size: 18px;
+                font-family: 'gp';
+                font-weight: 600;
+                float: left;
+                text-decoration: none;
+                @include transition(all 300ms ease-in-out);
+                &:hover {
+                    color: $color-sky-blue;
+                }
+                @media screen and (max-width: $screen-960) {
+                    font-size: 13px;
+                    padding: 10px 15px;
+                    border-top: $color-gray 1px solid;
+                    width: 100%;
+                    color: $color-black;
+                }
+            }
+            li a {
+                @media screen and (max-width: $screen-960) {
+                    padding: 8px 0 8px 25px;
+                    background: $color-light-green;
+                }
+            }
+        }
+        ul {
+            @media screen and (min-width: $screen-961) {
+                position: absolute;
+                left: 0;
+                top: 100%;
+                min-width: 200px;
+                z-index: 99;
+                background: $color-light-green;
+                opacity: 0;
+                visibility: hidden;
+                @include transform(translateX(-100px));
+            }
+        }
+    }
+    ul li.current-menu-item a {
+        background: $color-green;
+        color: $color-white;
+    }
+}
+
+.responsive_nav {
+    display: none;
+    height: 35px;
+    width: 35px;
+    background: $color-light-green;
+    border: none;
+    color: $color-black;
+    font-size: 17px;
+    line-height: 38px;
+    padding: 0;
+    text-align: center;
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    cursor: pointer;
+    @media screen and (max-width: $screen-960) {
+        display: block;
+    }
+    &:hover,
+    &:focus {
+        background: $color-black2;
+        color: $color-yellow;
+    }
+}
+
+@media screen and (min-width: $screen-961) {
+    .main-navigation .menu-item-has-children>a:after {
+        top: 17px;
+    }
+}
+
+.header-profile {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    .img {
+        height: 40px;
+        width: 40px;
+        @include border-radius(50%);
+        @extend %profilePhotoDiv;
+        margin-right: 5px;
+        border-radius: 100%;
+    }
+    .name,
+    .info {
+        color: $color-white;
+        font-size: 14px;
+        padding-left: 7px;
+    }
+    .name {
+        background: url(../img/down-arrow.png) no-repeat center right;
+        // padding-right: 20px;
+        background-size: 14px;
+    }
+    .info {
+        font-size: 10px;
+        width: 100%;
+        font-family: 'gp';
+    }
+}
+.user-img img{
+    border-radius: 100%;
+}
+
+.profoleImagePart {
+    margin: 0 auto;
+    .image {
+        @extend %profilePhotoDiv;
+        @include size(40px, 40px);
+        @include border-radius(50%);
+        margin-right: 10px;
+        @media screen and ( max-width: $screen-736) {
+            @include size(140px, 140px);
+            background-size: 80px;
+        }
+    }
+}

@@ -1,0 +1,159 @@
+@import '../../assets/sass/variables';
+@import '../../assets/sass/mixins';
+
+
+.card{
+  background: $color-light-pink4;
+  input{
+    &[type='text']{
+      @extend %inputTheme;
+    }
+  }
+  h4{
+    color: $color-pink2;
+    font-family: 'gp';
+    font-size: 30px;
+    @media screen and ( max-width: $screen-736 ) {
+      font-size: 20px;
+    }
+  }
+    input{
+      &[type='file']{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 999;
+        opacity: 0;
+        cursor: pointer;
+      }
+    }
+    label {
+        width: 100%;
+        font-size: 14px;
+        font-family: 'gp';
+        padding-left: 15px;
+        line-height: 14px;
+    }
+    input.card-icon{
+        background-image: url('../../assets/img/card2.png');
+        background-repeat: no-repeat;
+        background-position: center right 15px;
+        padding-right: 50px;
+    }
+    input.person-icon{
+        background-image: url('../../assets/img/person.png');
+        background-repeat: no-repeat;
+        background-position: center right 15px;
+        padding-right: 50px;
+    }
+}
+
+p.text-paragraph-f {
+  color: #2c2a2a !important;
+  font-size: 12px !important;
+  display: block;
+  padding-bottom: 15px;
+  font-family: 'gp'
+}
+p.packages-para {
+  font-family: 'gp'
+}
+
+.savebtn{
+  @extend %get-in-touch-btn;
+  width: auto;
+  padding: 10px 40px;
+}
+.white-card-warp{
+    @include size(135px, 135px);
+    background-color: $color-white;
+    @include border-radius(50%) ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+
+/* The container */
+
+.check-in {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  @include user-select(none);
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  label{
+      font-family: 'gpm';
+  }
+}
+
+
+/* Hide the browser's default checkbox */
+
+/* Create a custom checkbox */
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #ece1e4;
+  @include border-radius(50%);
+  border: #e9dee1 1px solid;
+}
+
+/* On mouse-over, add a grey background color */
+
+.check-in {
+  &:hover input ~ .checkmark {
+    background-color: #ece1e4;
+  }
+  input:checked ~ .checkmark {
+    background-color: #ece1e4;
+  }
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+
+.check-in input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.font-s {
+  color: #232122;
+  font-size: 14px !important;
+  padding-left: 40px !important;
+  padding-top: 5px;
+  font-weight: bold;
+  text-align: left;
+}
+
+/* Style the checkmark/indicator */
+
+.check-in .checkmark:after {
+  left: 4px;
+  top: 4px;
+  width: 15px;
+  height: 15px;
+  background: $color-pink2;
+  @include border-radius(50%)
+}

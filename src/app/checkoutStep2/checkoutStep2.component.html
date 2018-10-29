@@ -1,0 +1,109 @@
+<section class="checkout-steps mb-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="checkout-steps-list">
+                    <li class="steps-list-item done">
+                        <div class="step-number">1</div>
+                        <div class="step-description">Schedule appointment</div>
+                    </li>
+                    <li class="steps-list-item active">
+                        <div class="step-number">2</div>
+                        <div class="step-description">Pay and Book</div>
+                    </li>
+                    <li class="steps-list-item">
+                        <div class="step-number">3</div>
+                        <div class="step-description">Booking Confirmation</div>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="checkout-body mb-150">
+    <div class="container">
+        <div class="checkout-body-left">
+            <div class="row">
+                <div class="col-sm-4">
+                    <a href="" class="payment-cart text-center">
+                        <div class="label-wrapper">
+                            <p class="mb-2"><img src="assets/img/credit-cards.png" alt=""></p>
+                            <p class="font-14 mb-1">Pay Now</p>
+                            <p>
+                                <small>Credit cards are securely encrypted</small>
+                            </p>
+                        </div>
+                        <div class="left-bar"></div>
+                    </a>
+                </div>
+                <div class="col-sm-8">
+                    <div class="pay-m">
+                        <div class="form-group" (click)="selectmethod('1')">
+                            <input type="radio" id="card-p" class="r-btn" checked name="paym">
+                            <label for="card-p">Pay By Credit/Debit Card</label>
+                        </div>                       
+                        <form class="font-14">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Cardholder's Name*">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Credit card Number*">
+                            </div>
+                            <div class="form-group">
+                                <label>Expiration Date</label>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <select class="form-control">
+                                            <option>Month</option>
+                                            <option>Jan</option>
+                                            <option>Feb</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <select class="form-control">
+                                            <option>Year</option>
+                                            <option>2000</option>
+                                            <option>2001</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <input type="text" class="form-control" placeholder="CVV">
+                                    </div>
+                                    <div class="col-9">
+                                        <img src="assets/img/cvv.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="form-group" (click)="selectmethod('2')">
+                            <input type="radio" id="card-c" class="r-btn" name="paym">
+                            <label for="card-c">Pay By Cash</label>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+        <div class="checkout-body-right">
+            <div class="recap-sidebar">
+                <div class="recap-sidebar-item">
+                    <h6>{{ services.companyName + services.companyLocation}}</h6>
+                </div>
+                <ng-container *ngIf="services.serviceData?.length >0">
+                    <div class="recap-sidebar-item" *ngFor="let l of services.serviceData">
+                        <p class="name">{{ l.title }}</p>
+                        <span class="duration">{{ l.duration }}min</span>
+                        <span class="price float-right">SGD {{ l.price }}</span>
+                    </div>
+                </ng-container>
+                
+                <div class="recap-sidebar-item">
+                    <button (click)="bookNow()" class="btn btn-primary btn-block"><i class="fas fa-shopping-cart float-left mt-1"></i> Book Now SGD {{ total }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>  

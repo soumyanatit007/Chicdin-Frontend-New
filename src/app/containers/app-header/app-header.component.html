@@ -1,0 +1,69 @@
+<header class="main-bg-color w-100 float-left">
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-end">
+      <div class="col-sm-12 col-md-12 col-lg-2 float-right">
+        <div class="login-div">
+          <div *ngIf="!IsLoggedIn">
+            <button type="button" class="btn deep-bg-pink btn-sm text-uppercase cursor text-white d-inline-block" (click)="SignIn()">
+              Sign In</button>
+            <button type="button" class="btn deep-border border btn-sm bg-transparent text-uppercase cursor text-white d-inline-block"
+              (click)="SignUp()">
+              Sign up</button>
+          </div>
+
+          <div class="dropdown">
+            <div class="header-profile" *ngIf="IsLoggedIn">
+              <div class="profoleImagePart">
+                <div class="image" *ngIf='isDefaultImageShow'>
+
+                </div>
+                <div class="user-img" *ngIf='isImageShow'>
+                  <img src={{userImage}} height="40" width="40">
+                </div>
+              </div>
+              <div>
+                <p class="name">{{name}}</p>
+                <p class="info">You have SGD 0 in cashback</p>  
+              </div>
+            </div>
+            
+            <div class="dropdown-menu user" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/profile']"><i class="fas fa-user mr-2"></i>Profile</a>
+              <a class="dropdown-item" href="javascript:void(0)" (click)="logout()"><i class="fas fa-unlock-alt mr-2"></i>Logout</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="logo-div text-center w-100 float-left pt-5">
+          <a [routerLink]="['/']">
+            <!-- <img src="../../../assets/img/logo.png" alt="" class="img-fluid"> -->
+            <img src="./assets/img/logo.png" alt="" class="img-fluid">
+          </a>
+        </div>
+        <button class="responsive_nav radius3">
+          <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <div class="menubar-div w-100 float-left">
+      <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+          <div class="main_navigation">
+            <ul>
+              <li class="dropdown" *ngFor='let header of mainCatagories'>
+                <a href="javascript:void(0)">{{header.name}}</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item submenu" *ngFor='let subHeader of header.subcategory' href="javascript:void(0)" (click)="categoryDetails(subHeader)">{{subHeader.name}}</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

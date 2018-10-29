@@ -1,0 +1,242 @@
+<section class="log-in-page registration-page py-5">
+  <div class="container">
+
+    <div *ngIf='isRegistrationFormShow'>
+      <h1 style="color:#30354d;">Registration</h1>
+      <form class="mb-5" [formGroup]="SignUpForm">
+        <div class="row justify-content-center d-flex">
+          <div class="col-md-5 col-sm-10">
+            <div class="face-book-btn">
+              <a href="#">
+                <i class="fab fa-facebook-f"></i> Connect With Facebook</a>
+            </div>
+            <p class="text-paragraph-f">Don't worry, we never post on your behalf.</p>
+            <label class="or">or</label>
+            <div class="clearfix"></div>
+            <div class="input-warp">
+              <input placeholder="First Name" [ngClass]="{'bordererror': !SignUpForm.controls['first_name'].valid && SignUpForm.controls['first_name'].touched}"
+                type="text" name="first_name" formControlName="first_name">
+
+              <a href='javascript:void(0)' *ngIf="!SignUpForm.controls['first_name'].valid && SignUpForm.controls['first_name'].touched"
+                (click)='firstNameErrorMessage()' class="info-icon">
+                <i class="fa fa-exclamation"></i>
+              </a>
+
+              <div class="text-danger error-massage" *ngIf="!SignUpForm.controls['first_name'].valid && SignUpForm.controls['first_name'].touched && isShowFirstNameErrorMessage">
+                First name should be at least 2 characters.
+              </div>
+            </div>
+            <div class="input-warp">
+              <input placeholder="Last Name" [ngClass]="{'bordererror': !SignUpForm.controls['last_name'].valid && SignUpForm.controls['last_name'].touched}"
+                type="text" name="last_name" formControlName="last_name">
+
+              <a href='javascript:void(0)' *ngIf="!SignUpForm.controls['last_name'].valid && SignUpForm.controls['last_name'].touched"
+                (click)='lastNameErrorMessage()' class="info-icon">
+                <i class="fa fa-exclamation"></i>
+              </a>
+
+              <div class="text-danger error-massage" *ngIf="!SignUpForm.controls['last_name'].valid && SignUpForm.controls['last_name'].touched && isShowLastNameErrorMessage">
+                Last name should be at least 2 characters.
+              </div>
+            </div>
+            <div class="input-warp">
+              <input placeholder="Email" [ngClass]="{'bordererror': !SignUpForm.controls['email'].valid && SignUpForm.controls['email'].touched}"
+                type="email" name="email" formControlName="email">
+
+              <a href='javascript:void(0)' *ngIf="!SignUpForm.controls['email'].valid && SignUpForm.controls['email'].touched" (click)='emailErrorMessage()'
+                class="info-icon">
+                <i class="fa fa-exclamation"></i>
+              </a>
+              <!-- <a *ngIf='isEmailWrong' class="info-icon red">
+                <i class="fa fa-times"></i>
+              </a> -->
+              <a *ngIf='isEmailWrong' class="text-danger error-massage">
+                  <i class="fa fa-times">Email is already registered</i>
+              </a>
+
+              <a *ngIf='isEmailCheck' class="text-success error-massage">
+                <i class="fa fa-check"></i>Email is valid
+              </a>
+
+              <div class="text-danger error-massage" *ngIf="!SignUpForm.controls['email'].valid && SignUpForm.controls['email'].touched && isShowEmailErrorMessage">
+                Please enter a valid email.
+              </div>
+            </div>
+            <div class="input-warp">
+              <input placeholder="Password should be at least 6 characters" [ngClass]="{'bordererror': !SignUpForm.controls['password'].valid && SignUpForm.controls['password'].touched}"
+                type="password" name="password" formControlName="password">
+
+              <a href='javascript:void(0)' *ngIf="!SignUpForm.controls['password'].valid && SignUpForm.controls['password'].touched" (click)='passwordErrorMessage()'
+                class="info-icon">
+                <i class="fa fa-exclamation"></i>
+              </a>
+
+              <div class="text-danger error-massage" *ngIf="!SignUpForm.controls['password'].valid && SignUpForm.controls['password'].touched && isShowPasswordErrorMessage">
+                Passsword should be at least 6 characters.
+              </div>
+            </div>
+            <div class="input-warp">
+              <input placeholder="Confirm Password" [ngClass]="{'bordererror': !SignUpForm.controls['confirmed_password'].valid && SignUpForm.controls['confirmed_password'].touched}"
+                type="password" name="confirmed_password" formControlName="confirmed_password">
+
+              <a href='javascript:void(0)' *ngIf="!SignUpForm.controls['confirmed_password'].valid && SignUpForm.controls['confirmed_password'].touched"
+                (click)='confirmPasswordErrorMessage()' class="info-icon">
+                <i class="fa fa-exclamation"></i>
+              </a>
+
+              <div class="text-danger error-massage" *ngIf="!SignUpForm.controls['confirmed_password'].valid && SignUpForm.controls['confirmed_password'].touched && isShowConfirmPasswordErrorMessage">
+                Password not matched.
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="input-warp">
+                  <div class="custom-select2">
+                    <select id="c" formControlName="country" [ngClass]="{'bordererror': !SignUpForm.controls['country'].valid && SignUpForm.controls['country'].touched}">
+                      <option value=''>Select Country</option>
+                      <option *ngFor='let c of countries' [value]="c.id">{{c.name}}</option>
+                    </select>
+
+                    <a href='javascript:void(0)' *ngIf="!SignUpForm.controls['country'].valid && SignUpForm.controls['country'].touched" (click)='countrySelectErrorMessage()'
+                      class="info-icon">
+                      <i class="fa fa-exclamation"></i>
+                    </a>
+
+                    <div class="text-danger error-massage" *ngIf="!SignUpForm.controls['country'].valid && SignUpForm.controls['country'].touched && isShowCountryErrorMessage">
+                      Please select the country.
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="input-warp">
+                  <div class="custom-select2">
+                    <select id="g" formControlName="gender" [ngClass]="{'bordererror': !SignUpForm.controls['gender'].valid && SignUpForm.controls['gender'].touched}">
+                      <option value=''>Select Gender</option>
+                      <option *ngFor='let g of genders' [value]="g.id">{{g.name}}</option>
+                    </select>
+
+
+                    <a href='javascript:void(0)' *ngIf="!SignUpForm.controls['gender'].valid && SignUpForm.controls['gender'].touched" (click)='genderSelectErrorMessage()'
+                      class="info-icon">
+                      <i class="fa fa-exclamation"></i>
+                    </a>
+
+                    <div class="text-danger error-massage" *ngIf="!SignUpForm.controls['gender'].valid && SignUpForm.controls['gender'].touched  && isShowGenderErrorMessage">
+                      Please select the gender.
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="input-warp">
+                  <input placeholder="Country Code" type="text" name="countryCode" formControlName="countryCode">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="input-warp">
+                  <input placeholder="Mobile Number" [textMask]="{mask: mask}" [ngClass]="{'bordererror': !SignUpForm.controls['mobile'].valid && SignUpForm.controls['mobile'].touched}"
+                    type="text" name="mobile" formControlName="mobile">
+
+                  <a href='javascript:void(0)' *ngIf="!SignUpForm.controls['mobile'].valid && SignUpForm.controls['mobile'].touched" (click)='mobileErrorMessage()'
+                    class="info-icon">
+                    <i class="fa fa-exclamation"></i>
+                  </a>
+
+                  <div style="bottom:-2px; line-height:1" class="text-danger error-massage" *ngIf="!SignUpForm.controls['mobile'].valid && SignUpForm.controls['mobile'].touched && isShowMobileErrorMessage">
+                    Phone number should be at least 10 digit.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="input-warp">
+              <input placeholder="Country Code" type="text" name="countryCode" formControlName="countryCode">
+            </div>
+
+
+            <div class="input-warp">
+              <input placeholder="Mobile Number" myNumberOnly [ngClass]="{'bordererror': !SignUpForm.controls['mobile'].valid && SignUpForm.controls['mobile'].touched}"
+                type="text" name="mobile" formControlName="mobile">
+
+              <a href='javascript:void(0)' *ngIf="!SignUpForm.controls['mobile'].valid && SignUpForm.controls['mobile'].touched" (click)='mobileErrorMessage()'
+                class="info-icon">
+                <i class="fa fa-exclamation"></i>
+              </a>
+
+              <div class="text-danger error-massage" *ngIf="!SignUpForm.controls['mobile'].valid && SignUpForm.controls['mobile'].touched && isShowMobileErrorMessage">
+                Phone number should be at least 10 digit.
+              </div>
+            </div> -->
+
+            <div class="input-warp">
+              <input type="text" placeholder="Date of Birth" [ngClass]="{'bordererror': !SignUpForm.controls['date_of_birth'].valid && SignUpForm.controls['date_of_birth'].touched }"
+                [maxDate]="maxDate" formControlName="date_of_birth" bsDatepicker>
+
+
+              <a href='javascript:void(0)' *ngIf="!SignUpForm.controls['date_of_birth'].valid && SignUpForm.controls['date_of_birth'].touched"
+                (click)='dobSelectErrorMessage()' class="info-icon">
+                <i class="fa fa-exclamation"></i>
+              </a>
+
+              <div class="text-danger error-massage" *ngIf="!SignUpForm.controls['date_of_birth'].valid && SignUpForm.controls['date_of_birth'].touched && isShowDOBErrorMessage">
+                Please select the DOB.
+              </div>
+            </div>
+            <div>
+              <label class="registration-check">
+                <input type="checkbox" formControlName="is_promotional_mail_received">
+                <span class="checkmark"></span>
+                <em>I would like to receive promotions, tips and announcements via email</em>
+              </label>
+            </div>
+            <button type="submit" [ladda]="isLoading" class="get-in-touch-btn chicdin-r-btn" (click)="signUp(SignUpForm.value)" [disabled]="!SignUpForm.valid || isEmailWrong" style="width:100%">Submit</button>
+            <p class="font-size-12 text-center block">Not a member??
+              <a [routerLink]="['/login']">Login here</a>
+            </p>
+            <p class="pl-0 text-center">
+              By proceeding you agree with our
+              <a class="pink-h" href="#">Terms and Conditions</a> and
+              <a class="pink-h" href="#">Privacy Policy</a>
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+    <div *ngIf='isOtpFormShow'>
+      <h1 class="mb-5">OTP</h1>
+      <div>
+        <form autocomplete="off" [formGroup]="otpForm">
+          <div class="row justify-content-center d-flex">
+            <div class="col-sm-5">
+              <div class="inputOTP">
+                <input type="text" myNumberOnly placeholder="_" formControlName="otp1" #otp1 [ngClass]="{'bordererror': !otpForm.controls['otp1'].valid && otpForm.controls['otp1'].touched}"
+                  maxlength="1" />
+                <input type="text" myNumberOnly placeholder="_" formControlName="otp2" #otp2 [ngClass]="{'bordererror': !otpForm.controls['otp2'].valid && otpForm.controls['otp2'].touched}"
+                  maxlength="1" />
+                <input type="text" myNumberOnly placeholder="_" formControlName="otp3" #otp3 [ngClass]="{'bordererror': !otpForm.controls['otp3'].valid && otpForm.controls['otp3'].touched}"
+                  maxlength="1" />
+                <input type="text" myNumberOnly placeholder="_" formControlName="otp4" #otp4 [ngClass]="{'bordererror': !otpForm.controls['otp4'].valid && otpForm.controls['otp4'].touched}"
+                  maxlength="1" />
+              </div>
+              <button type="submit" [ladda]='isLoading' class="get-in-touch-btn" (click)='submitOtp(otpForm.value)' [disabled]="!otpForm.valid">
+                submit </button>
+              <button type="submit" *ngIf='isResendOtpShow' [ladda]='isLoadingResendOtp' class="get-in-touch-btn" (click)='resendOtp()'>
+                Resend Otp </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+  </div>
+</section>

@@ -1,0 +1,107 @@
+@import '../../assets/sass/variables';
+@import '../../assets/sass/mixins';
+
+
+
+.booking{
+  background: $color-light-pink4;
+    .booking-inner{
+      // background: $color-white;
+      @include border-radius(5px);      
+      .mainHeader{
+        padding: 15px 25px;
+        font-family: 'gpm';
+        font-size: 24px;
+      }
+      .sortByDiv{
+        background: $color-light-gray;
+        padding: 15px 25px;
+        .LHS{
+          float: left;
+          p{
+            font-size: 13px;
+            font-family: 'gpm';
+            line-height: 45px;
+          }
+        }
+        .RHS{
+          float: right;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          p{
+            font-size: 13px;
+            font-family: 'gpm';
+            padding-right: 10px;
+          }
+          select{
+            height: 45px;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-size: 13px;
+            font-family: 'gpm';
+            outline: none;
+          }
+        }
+      }
+      .card-header{
+        @media screen and ( max-width: $screen-736 ){
+          padding: 10px;
+        }
+      }
+    }
+  .category-search-loop{
+    @media screen and ( max-width: $screen-736 ){
+      margin: 10px;
+    }
+    h5{
+      span{
+        padding-top: 0;
+      }
+    }
+  }
+  .category-search-right-box{
+    @media screen and ( max-width: $screen-736 ){
+      padding: 10px;
+    }
+  }
+  .category-right-detail{
+    display: flex;
+    @media screen and (max-width: $screen-736) {
+      display: block;
+    }
+    .LHS{
+      flex: 1;
+    }
+  }
+}
+.readMore{
+  .LHS{
+    float: left;
+    a{
+      color: $color-red;
+      font-size: 12px;
+      margin: 10px 10px 10px 0;
+    }
+  }
+  .RHS{
+    float: right;
+  }
+}
+ul.rit{
+  display: inline-flex;
+  @media screen and (max-width: $screen-736) {
+      margin-left: 0;
+      width: 100%;
+  }
+}
+.promotions{
+  cursor: pointer;
+}
+.cancleBooking{
+  @extend %get-in-touch-btn;
+  @include border-radius(5px);
+  width: auto;
+  padding: 8px;
+  font-size: 12px;
+}

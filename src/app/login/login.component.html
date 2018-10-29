@@ -1,0 +1,73 @@
+<div class="clearfix"></div>
+
+<div class="log-in-page py-5">
+  <div class="container">
+
+    <h1>You Can Log in here</h1>
+
+    <form [formGroup]="loginForm">
+      <div class="row justify-content-center d-flex  mb-150">
+        <div class="col-sm-5">
+          <div class="face-book-btn">
+            <a (click)="socialSignIn('facebook')">
+              <i class="fab fa-facebook-f"></i> Connect With Facebook</a>
+          </div>
+          <p class="text-paragraph-f">Don't worry, we never post on your behalf.</p>
+          <label class="or">or</label>
+
+          <div class="input-warp">
+            <input placeholder="Email" [ngClass]="{'bordererror': !loginForm.controls['email'].valid && loginForm.controls['email'].touched}"
+              type="email" formControlName="email" name="email">
+
+            <a href='javascript:void(0)' *ngIf="!loginForm.controls['email'].valid && loginForm.controls['email'].touched" (click)='emailErrorMessage()'
+              class="info-icon">
+              <i class="fa fa-exclamation"></i>
+            </a>
+
+            <div class="text-danger error-massage" *ngIf="!loginForm.controls['email'].valid && loginForm.controls['email'].touched && isShowEmailErrorMessage">
+              Please enter a valid email.
+            </div>
+          </div>
+
+          <div class="input-warp">
+            <input placeholder="Password should be at least 6 characters" [ngClass]="{'bordererror': !loginForm.controls['password'].valid && loginForm.controls['password'].touched}"
+              type="password" formControlName="password" name="password">
+
+            <a href='javascript:void(0)' *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched" (click)='passwordErrorMessage()'
+              class="info-icon">
+              <i class="fa fa-exclamation"></i>
+            </a>
+
+            <div class="text-danger error-massage" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched && isShowPasswordErrorMessage">
+              Password should be at least 6 characters.
+            </div>
+          </div>
+
+          <div class="clearfix"></div>
+          <div class="row">
+
+            <div class="col-sm-12 col-md-6">
+              <label class="check-in font-s font--size-14">Remember me
+                <input type="checkbox" formControlName="rememberMe">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <!-- <div class="col-sm-12 col-md-6 text-right font--size-14" (click)="forgotPassword()">
+              Forgot your password?
+            </div> -->
+            <div class="col-sm-12 col-md-6 text-right font--size-14">
+              <a [routerLink]="['/forgotPassword']">Forgot your password?</a>
+            </div>
+            <div class="col-sm-12">
+              <button type="submit" style="width:100%" [ladda]="isLoading" class="get-in-touch-btn" (click)="login(loginForm.value)" [disabled]="!loginForm.valid">Submit</button>
+              <p class="font-size-12 text-center block">Not a member??
+                <a [routerLink]="['/signup']">Signup here</a>
+              </p>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

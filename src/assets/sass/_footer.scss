@@ -1,0 +1,139 @@
+footer {
+  width: 100%;
+  display: block;
+  background: $color-light-pink2;
+}
+
+.footer-menu {
+  width: 100%;
+  display: block;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0px 0px 0;
+    @media screen and (max-width: $screen-736) {
+        width: 100%;
+        float: left;
+        text-align: center;
+    }
+    li {
+      display: inline-block;
+      @media screen and (max-width: $screen-480) {
+          text-align: center;
+      }
+      a {
+        color: $color-deep-blue;
+        font-size: 12px;
+        padding: 0px 40px 0px 0px;
+        text-decoration: none;
+        color: $color-deep-blue;
+        text-transform: capitalize;
+        @media screen and (max-width: $screen-736) {
+            padding: 0px 10px 0px 0px;
+        }
+        @media screen and (max-width: $screen-480) {
+            padding: 0px 25px 0px 0px;
+        }
+        @media screen and (max-width: $screen-414) {
+            padding: 0px 2px 0px 0px;
+        }
+      }
+    }
+  }
+}
+
+.list-btn {
+  width: 122px;
+  height: 27px;
+  border: $color-deep-blue 1px solid;
+  background: $color-light-pink2;
+  text-align: center;
+  line-height: 27px;
+  @include border-radius(8px);
+  text-transform: capitalize;
+  font-size: 12px;
+  float: right;
+  @media screen and (max-width: $screen-736) {
+    float: none;
+    margin: 10px auto 0;
+  }
+  @media screen and (max-width: $screen-480) {
+    float: none;
+    margin: 20px auto;
+  }
+  a {
+    color: $color-deep-blue;
+    text-decoration: none;
+  }
+}
+
+.footer-rit {
+  display: block;
+  padding: 0px 0px 0px 30px;
+  @media screen and (max-width: $screen-968) {
+    padding: 0px;
+  }
+  ul {
+    margin: 8px 0px 0px 0;
+    display: inline-block;
+    @media screen and (max-width: $screen-968) {
+        padding: 10px 0px;
+        margin: 0;
+    }
+  }
+  li {
+    display: inline-block;
+    margin-right: 5px;
+  }
+}
+
+ul.list-socila {
+  margin: 8px 0px 0 0;
+  padding: 0;
+  float: right;
+    li {
+        display: inline-block;
+        text-align: center;
+        a {
+            text-align: center;
+            font-size: 24px;
+            font-family: FontAwesome;
+            margin-right: 10px;
+            color: $color-blue;
+            display: block;
+            text-align: center;
+        }
+    }
+}
+
+/*===start chicdin section===*/
+.chicdin-section {
+  width: 100%;
+  display: block;
+  background: $color-blue;
+  margin: 101px 0 0 0;
+  position: relative;
+  p {
+    color: $color-white;
+    font-size: 18px;
+  }
+  @media screen and (max-width: $screen-960) {
+    margin: 2px 0 0 0;
+    text-align: center;
+  }
+}
+
+.right-mobile {
+  position: absolute;
+  top: -191px;
+  right: -84px;
+  @media screen and (max-width: $screen-960) {
+    position: relative;
+    top: 48px;
+    right: auto;
+    text-align: center;
+    display: inline-block;
+  }
+}
+
+/*===end chicdin section===*/

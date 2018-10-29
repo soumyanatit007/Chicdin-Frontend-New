@@ -1,0 +1,34 @@
+
+body {
+  font-family: 'gp';
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-family: 'gp';
+  &:hover, &:focus, &:active {
+    text-decoration: none;
+    font-family: 'gp';
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-family: 'lsr';
+  font-weight: 500;
+}
+
+h4, h5, h6, p {
+  font-family: 'gpm';
+  font-weight: 400;
+}
+
+img {
+  object-fit: cover;
+  object-position: center center;
+  vertical-align: middle;
+}
