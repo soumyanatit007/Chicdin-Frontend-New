@@ -67,8 +67,11 @@ export class DetailsComponent implements OnInit {
 
   public vendorDistanceResponse: any = [];
   public distanceRes: any = [];
-
+  public reviewmassage :any;
+  public customer:any;
+  public company_id:any;
   constructor(
+    public toastr:ToastrService,
     public http: UserHttpService,
     public router: Router,
     private _sanitizer: DomSanitizer,
@@ -79,7 +82,9 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    if (localStorage.getItem('UserData')) {
+      this.customer = JSON.parse(localStorage.getItem('UserData'));
+    }
     this.galleryOptions = [
       {
         width: '100%',
@@ -98,6 +103,7 @@ export class DetailsComponent implements OnInit {
         console.log('success :', success);
         this.current_gmdate = success.result.current_gmdate;
         if (success.ack === 1) {
+          this.company_id = success.result.company_details[0].id;
           this.ngProgress.done();
           if (success.result.services.length > 0) {
             this.companyDetailsResultServices = success.result.services;
@@ -322,5 +328,28 @@ export class DetailsComponent implements OnInit {
   // book now button
   bookNow() {
     this.router.navigate(['/startbooking']);
+  }
+
+  submitreview(){
+    const reviewData = {
+      company_id: this.company_id,
+      user_id: this.customer.id,
+      rating: '4',
+      comment: this.reviewmassage
+    };
+    this.http.newReviewAdd(reviewData).then((success_one: any) => {
+      if (success_one.ack === 1) {
+        this.reviewmassage = "";
+        this.toastr.success(success_one.msg, 'Success', {
+          timeOut: 5000
+        });
+      } else if (success_one.ack === 0) {
+        this.toastr.error(success_one.msg, 'Error', {
+          timeOut: 2000
+        });
+      }
+    }).catch((error: any) => {
+      console.log(error);
+    });
   }
 }

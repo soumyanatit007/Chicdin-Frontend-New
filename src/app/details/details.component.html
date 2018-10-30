@@ -326,6 +326,14 @@
               standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
               make a type specimen book.</p>
           </div>
+          <star-rating [starType]="icon" [rating]="2"></star-rating>
+          <div class="reply-msg">
+            <div class="d-flex">
+                
+                <textarea class="form-control" rows="3" [(ngModel)]="reviewmassage" placeholder="Type Your Message"></textarea>
+                <button type="submit" class="btn btn-primary" (click)="submitreview()">Submit</button>
+            </div>
+          </div>
         </div>
       </div>
       <!--end left panel-->

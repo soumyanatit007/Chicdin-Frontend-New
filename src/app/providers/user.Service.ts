@@ -362,4 +362,16 @@ export class UserHttpService {
                 });
         });
     }
+
+    newReviewAdd(value) {
+        const _base = this;
+        return new Promise(function (reject, resolve) {
+            _base.http.post(baseUrl.baseURL + '/webservice/bookings/app_company_review', value, { headers: _base.headers })
+                .subscribe(error => {
+                    reject(error);
+                }, success => {
+                    resolve(success);
+                });
+        });
+    }
 }

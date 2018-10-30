@@ -13,6 +13,7 @@ import { AccordionModule } from 'ngx-bootstrap';
 import { AgmCoreModule } from '@agm/core';
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { StarRatingModule } from 'angular-star-rating';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -38,7 +39,8 @@ export function HttpLoaderFactory(http: HttpClient) {
             apiKey: 'AIzaSyAf_l8aFF6j3XJgL4zH8V6huwEGZinG4rs'
         }),
         NgProgressModule,
-        NgxGalleryModule
+        NgxGalleryModule,
+        StarRatingModule.forRoot()
     ],
     declarations: [
         DetailsComponent

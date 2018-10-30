@@ -40,7 +40,10 @@ export class checkoutStep2Component  implements OnInit {
   bookNow(){
     if(this.methodselected){
       //booking
+      console.log('localStorage',localStorage);
       let test : any = JSON.parse(localStorage.getItem('vendorLocation'));
+      console.log('Test',test);
+      console.log('TRestyss ygfxyghu',test.vendorDetails.id);
       const dataThree = {
         customer_user_id: this.customer_user_id,
         company_slug: this.services.company_slug,
